@@ -1,0 +1,292 @@
+<!--  <!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="http://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
+  <script src="http://developer.mapsense.co/mapsense.js" charset="utf-8"></script>
+  <link type="text/css" href="http://developer.mapsense.co/mapsense.css" rel="stylesheet"/>
+  <style>
+      .neighborhood{
+          fill: rgba(0,0,0,.5);
+          stroke: rgba(68, 167, 228, 1);  /*blue*/
+      }
+      .neighborhood:hover{
+          fill: rgba(0,0,0,.2);
+          cursor: pointer;
+      }
+  </style>
+</head>
+<body>
+  <div id="myMap" style="width: 100vw; height: 100vh;"></div>
+  <script>
+    var dataSources = ['parcels_xaaaaaaa.geojson']
+    var map = mapsense
+      .map("#myMap") // select a div and add your map to it
+      // add a basemap layer and append your API key
+      .add(mapsense.basemap().apiKey("key-7f00c58eeb404b1da21cbac32608bc6d"))
+    map.center({lat: -12.0433, lon: -77.0283})
+    map.zoom(10)
+
+
+    dataSources.forEach(function(dataSource){
+      console.log(dataSource);
+      d3.json(('http://localhost:8000/' + dataSource), function(data){
+        map.add(mapsense.geoJson()
+                .features(data.features)
+                .selection(function(d){
+                  d.attr("class", "neighborhood");
+          })
+        )
+      })
+    })
+
+    // d3.json("parcels.geojson", function(data){
+    //   debugger;
+    //   map.add(mapsense.geoJson()
+    //           .features(data.features)
+    //           .selection(function(d){
+    //             d.attr("class", "neighborhood");
+    //     })
+    //   )
+    // })
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.8.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.8.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<script>
+var dataSources = ['parcels_xaaaaaaa.geojson', 'parcels_xaaaaaab.geojson','parcels_xaaaaaac.geojson', 'parcels_xaaaaaad.geojson', 'parcels_xaaaaaae.geojson', 'parcels_xaaaaaaf.geojson', 'parcels_xaaaaaag.geojson', 'parcels_xaaaaaah.geojson', 'parcels_xaaaaaai.geojson', 'parcels_xaaaaaaj.geojson']
+
+mapboxgl.accessToken = 'pk.eyJ1IjoidGhpc3NheXNub3RoaW5nIiwiYSI6IjFNbHllT2MifQ.5F7AhW2FxnpENc8eiE-HUA';
+var map = new mapboxgl.Map({
+  container: 'map', // container id
+  style: 'https://www.mapbox.com/mapbox-gl-styles/styles/outdoors-v7.json', //stylesheet location
+  center: [-12.0433, -77.0283], // starting position
+  zoom: 10 // starting zoom
+});
+
+var i = 0;
+
+
+
+var parcel1 = new mapboxgl.GeoJSONSource({
+  data: 'parcels_xaaaaaaa.geojson'
+})
+var parcel2 = new mapboxgl.GeoJSONSource({
+  data: 'parcels_xaaaaaab.geojson'
+})
+
+
+var parcel3 = new mapboxgl.GeoJSONSource({
+  data: 'parcels_xaaaaaac.geojson'
+})
+var parcel4 = new mapboxgl.GeoJSONSource({
+  data: 'parcels_xaaaaaad.geojson'
+})
+// var parcel5 = new mapboxgl.GeoJSONSource({
+//   data: 'parcels_xaaaaaae.geojson'
+// })
+// var parcel6 = new mapboxgl.GeoJSONSource({
+//   data: 'parcels_xaaaaaaf.geojson'
+// })
+// var parcel7 = new mapboxgl.GeoJSONSource({
+//   data: 'parcels_xaaaaaag.geojson'
+// })
+// var parcel8 = new mapboxgl.GeoJSONSource({
+//   data: 'parcels_xaaaaaah.geojson'
+// })
+// var parcel9 = new mapboxgl.GeoJSONSource({
+//   data: 'parcels_xaaaaaai.geojson'
+// })
+// var parcel10 = new mapboxgl.GeoJSONSource({
+//   data: 'parcels_xaaaaaaj.geojson'
+// })
+
+// dataSources.forEach(function(dataSource){
+//   window[dataSource] = new mapboxgl.GeoJSONSource({
+//     data: dataSource
+//   })
+// })
+
+map.on('style.load', function(){
+  // dataSources.forEach(function(dataSource){
+  // map.addSource("parcels", {
+  //   "type": "vector",
+  //   "url": "mapbox://urbinsight.ln1urf6r"})
+
+
+
+  //   map.addSource(dataSource, window[dataSource])
+
+  //   map.addLayer({
+  //     "id": "parcels",
+  //     "type": "fill",
+  //     "source": "parcels",
+  //     "layout" : {},
+  //     "paint": {
+  //       "line-width": 1,
+  //       "fill-color": "#1a9bb5"
+  //     }
+  //   })
+  // })
+  // map.addSource("parcel1", parcel1);
+
+  // map.addLayer({
+  //   "id": "parcel1",
+  //   "type": "fill",
+  //   "source": "parcel1",
+  //   "layout" : {
+  //   },
+  //   "paint": {
+  //     "fill-color": "#1a9bb5",
+  //     "line-width": 1
+  //   }
+  // })
+
+  // map.addSource("parcel2", parcel2);
+
+  // map.addLayer({
+  //   "id": "parcel2",
+  //   "type": "fill",
+  //   "source": "parcel2",
+  //   "layout" : {
+  //   },
+  //   "paint": {
+  //     "fill-color": "#1a9bb5",
+  //     "line-width": 1
+  //   }
+  // })
+
+  // map.addSource("parcel3", parcel3);
+
+  // map.addLayer({
+  //   "id": "parcel3",
+  //   "type": "fill",
+  //   "source": "parcel3",
+  //   "layout" : {
+  //   },
+  //   "paint": {
+  //     "fill-color": "#1a9bb5",
+  //     "line-width": 1
+  //   }
+  // })
+
+  // map.addSource("parcel4", parcel4);
+
+  // map.addLayer({
+  //   "id": "parcel4",
+  //   "type": "fill",
+  //   "source": "parcel4",
+  //   "layout" : {
+  //   },
+  //   "paint": {
+  //     "fill-color": "#1a9bb5",
+  //     "line-width": 1
+  //   }
+  // })
+
+  // map.addSource("parcel5", parcel5);
+
+  // map.addLayer({
+  //   "id": "parcel5",
+  //   "type": "fill",
+  //   "source": "parcel5",
+  //   "layout" : {
+  //   },
+  //   "paint": {
+  //     "fill-color": "#1a9bb5",
+  //     "line-width": 1
+  //   }
+  // })
+
+  // map.addSource("parcel6", parcel6);
+
+  // map.addLayer({
+  //   "id": "parcel6",
+  //   "type": "fill",
+  //   "source": "parcel6",
+  //   "layout" : {
+  //   },
+  //   "paint": {
+  //     "fill-color": "#1a9bb5",
+  //     "line-width": 1
+  //   }
+  // })
+
+  // map.addSource("parcel7", parcel7);
+
+  // map.addLayer({
+  //   "id": "parcel7",
+  //   "type": "fill",
+  //   "source": "parcel7",
+  //   "layout" : {
+  //   },
+  //   "paint": {
+  //     "fill-color": "#1a9bb5",
+  //     "line-width": 1
+  //   }
+  // })
+
+  // map.addSource("parcel8", parcel8);
+
+  // map.addLayer({
+  //   "id": "parcel8",
+  //   "type": "fill",
+  //   "source": "parcel8",
+  //   "layout" : {
+  //   },
+  //   "paint": {
+  //     "fill-color": "#1a9bb5",
+  //     "line-width": 1
+  //   }
+  // })
+
+  // map.addSource("parcel9", parcel9);
+
+  // map.addLayer({
+  //   "id": "parcel9",
+  //   "type": "fill",
+  //   "source": "parcel9",
+  //   "layout" : {
+  //   },
+  //   "paint": {
+  //     "fill-color": "#1a9bb5",
+  //     "line-width": 1
+  //   }
+  // })
+
+  // map.addSource("parcel10", parcel10);
+
+  // map.addLayer({
+  //   "id": "parcel10",
+  //   "type": "fill",
+  //   "source": "parcel10",
+  //   "layout" : {
+  //   },
+  //   "paint": {
+  //     "fill-color": "#1a9bb5",
+  //     "line-width": 1
+  //   }
+  // })
+// })
+
+</script>
+
+</body>
+</html>
